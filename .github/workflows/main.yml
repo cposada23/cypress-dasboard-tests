@@ -22,7 +22,7 @@ jobs:
         run: yarn lint
 
       - name: UI E2E Tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           config-file: cypress.config.ts
           install-command: yarn --immutable
