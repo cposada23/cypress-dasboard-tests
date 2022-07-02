@@ -24,6 +24,8 @@ jobs:
       - name: UI E2E Tests
         uses: cypress-io/github-action@v2
         with:
+          config-file: cypress.config.ts
+          install-command: yarn --immutable
           browser: chrome
           headless: true
           record: true
