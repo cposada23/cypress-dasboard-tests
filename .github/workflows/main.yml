@@ -103,6 +103,9 @@ jobs:
             echo "RESULTSSSSSSS"
             echo $content | jq -r '.results[0]| .file'
             echo "##########################"
+            echo "FAILINGSSSSSS"
+            echo $content | jq -r '.results[0]| .suites[0] | .failures'
+            echo "##########################"
           done
       # cat ${{ steps.finding-files.outputs.FILELIST }}
       # - name: Processing my found files from output
