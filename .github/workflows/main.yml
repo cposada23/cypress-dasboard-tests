@@ -97,7 +97,7 @@ jobs:
             echo "##########################"
             echo "$file"
             content = cat "$file"
-            echo "${{fromJson(content).results[0].file}}"
+            echo "${{fromJson($content).results[0].file}}"
             echo "##########################"
           done
       # cat ${{ steps.finding-files.outputs.FILELIST }}
