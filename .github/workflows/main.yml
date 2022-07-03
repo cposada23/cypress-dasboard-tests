@@ -29,6 +29,7 @@ jobs:
       - name: setupEnvs
         id: envs
         run: |
+          pwd
           echo "::set-output name=number::hiku"
           cypress='hola'
           echo "::set-output name=ORG_ID::${cypress}"
