@@ -86,22 +86,26 @@ jobs:
         with:
           name: mochawesome
           path: artifact/
-      - run: ls .
+      - run: ls -R
       - name: list files and store them
         working-directory: ./artifact
         id: finding-files
         run: |
+          ls .
           echo "::set-output name=FILELIST::$(find . -name '*.json' -print)"
       - name: Processing my found files from output
         run: |
-          IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
-          for i in "${myarray[@]}"; do
-            file_path=$(dirname "${i}")
-            file_name=$(basename "${i}")
-            cd file_path
-            cat file_name
-          done
+          echo "FILELIST"
+          echo ${{ steps.finding-files.outputs.FILELIST }}
           echo "DONE"
+        # IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
+        # for i in "${myarray[@]}"; do
+        #   file_path=$(dirname "${i}")
+        #   file_name=$(basename "${i}")
+        #   cd file_path
+        #   cat file_name
+        # done
+        # echo "DONE"
   #   steps:
   #     - name: Print Dashboard URL
   #       run: |
