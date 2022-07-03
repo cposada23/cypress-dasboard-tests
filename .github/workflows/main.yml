@@ -65,6 +65,7 @@ jobs:
           group: 'Actions example'
           config: baseUrl=https://www.google.com/,projectId=${{steps.envs.outputs.projectId}}
       - name: consolidate
+        if: failure()
         run: echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }}
   # cypress-report:
   #   runs-on: ubuntu-latest
