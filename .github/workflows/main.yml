@@ -1,6 +1,9 @@
 name: Continuous integration
 
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - test-dashboard
 
 jobs:
   cypress-run:
@@ -60,13 +63,6 @@ jobs:
           parallel: true
           group: 'Actions example'
           config: baseUrl=https://www.google.com/,projectId=${{steps.envs.outputs.projectId}}
-
-          #  # pass the Dashboard record key as an environment variable
-          # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # # pass GitHub token to allow accurately detecting a build vs a re-run build
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # # pass the project ID from the secrets through environment variable
-          # CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
       - name: consolidate
         run: echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }}
   # cypress-report:
