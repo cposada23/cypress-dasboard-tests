@@ -71,7 +71,7 @@ jobs:
         #   echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }}
         #   echo $GITHUB_STEP_SUMMARY
         with:
-          name: mochawesome
+          name: mochawesome${{ matrix.containers }}
           path: cypress/results
 
   # cypress-report:
