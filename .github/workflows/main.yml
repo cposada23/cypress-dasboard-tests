@@ -42,7 +42,7 @@ jobs:
           parallel: true
           group: 'Actions example'
           env: |
-            CONTAINER= ${{matrix.containers}}
+            CONTAINER= ${{matrix.containers}},
             NUMBER=2223455
           # config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
         env:
