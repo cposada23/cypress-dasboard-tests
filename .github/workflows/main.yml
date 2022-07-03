@@ -35,7 +35,7 @@ jobs:
           echo "::set-output name=number::hiku"
           cypress='hola'
           echo "::set-output name=ORG_ID::${cypress}"
-          echo "::set-output name=projectId::${{ secrets.PROJECT_ID }}"
+          echo "::set-output name=projectId::3124
           echo "project id: :${{ secrets.PROJECT_ID }}"
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
