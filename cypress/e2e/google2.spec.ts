@@ -1,4 +1,4 @@
-describe('This is my first cypress test', () => {
+describe('title', () => {
   it('should have a title', () => {
     cy.visit('/');
     cy.title().should('eq', 'Google56');

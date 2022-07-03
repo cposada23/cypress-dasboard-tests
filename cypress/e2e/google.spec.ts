@@ -1,5 +1,5 @@
-describe('This is my first cypress test', () => {
-  it('should have a title', () => {
+describe('search id', () => {
+  it('should have a title with id', () => {
     cy.visit('https://www.google.com/');
     cy.title().should('eq', 'Google');
     cy.log(Cypress.env('CONTAINER') || 'NO_CONTAINER');
