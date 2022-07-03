@@ -92,28 +92,33 @@ jobs:
         id: finding-files
         run: |
           ls .
-          echo "::set-output name=FILELIST::$(find . -name '*.json' -print)"
-      - name: Processing my found files from output
-        working-directory: ./artifact
+          echo "::set-output name=FILELIST::$(:r! ls *.mp3)"
+      - name: file list json
         run: |
-          echo "FILELIST"
+          echo "FIELIST"
           echo ${{ steps.finding-files.outputs.FILELIST }}
-          content=cat ${{steps.finding-files.outputs.FILELIST}}
-          # the following lines are only required for multi line json
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          # end of optional handling for multi line json
-          echo "::set-output name=packageJson::$content"
-          echo "DONE"
-        # IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
-        # for i in "${myarray[@]}"; do
-        #   file_path=$(dirname "${i}")
-        #   file_name=$(basename "${i}")
-        #   cd file_path
-        #   cat file_name
-        # done
-        # echo "DONE"
+
+      # - name: Processing my found files from output
+      #   working-directory: ./artifact
+      #   run: |
+      #     echo "FILELIST"
+      #     echo ${{ steps.finding-files.outputs.FILELIST }}
+      #     content=cat ${{steps.finding-files.outputs.FILELIST}}
+      #     # the following lines are only required for multi line json
+      #     content="${content//'%'/'%25'}"
+      #     content="${content//$'\n'/'%0A'}"
+      #     content="${content//$'\r'/'%0D'}"
+      #     # end of optional handling for multi line json
+      #     echo "::set-output name=packageJson::$content"
+      #     echo "DONE"
+      # IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
+      # for i in "${myarray[@]}"; do
+      #   file_path=$(dirname "${i}")
+      #   file_name=$(basename "${i}")
+      #   cd file_path
+      #   cat file_name
+      # done
+      # echo "DONE"
   #   steps:
   #     - name: Print Dashboard URL
   #       run: |
