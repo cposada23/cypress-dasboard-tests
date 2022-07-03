@@ -1,4 +1,4 @@
-describe('search id', () => {
+describe.skip('search id', () => {
   it('should have a title with id', () => {
     cy.visit('https://www.google.com/');
     // eslint-disable-next-line cypress/no-unnecessary-waiting
