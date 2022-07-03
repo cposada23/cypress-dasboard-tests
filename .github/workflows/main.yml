@@ -30,10 +30,8 @@ jobs:
         id: envs
         run: |
           echo "::set-output name=number::hiku"
-          cypress=$(aws ssm get-parameter --name /${env}/cypress --with-decryption --output text --query "Parameter.Value")
           cypress='hola'
           echo "::set-output name=ORG_ID::${cypress}"
-
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
