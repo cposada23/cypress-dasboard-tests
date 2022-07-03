@@ -55,7 +55,7 @@ jobs:
           # # pass the project ID from the secrets through environment variable
           # CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
       - name: consolidate
-        run: echo result for ${{ matrix.containters }} ${{ steps.cypress-tests.outcome }}
+        run: echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }} ${{ steps.cypress-tests.outputs }}
   # cypress-report:
   #   runs-on: ubuntu-latest
   #   name: Integration tests reporter
