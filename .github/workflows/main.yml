@@ -93,9 +93,11 @@ jobs:
         run: |
           echo "::set-output name=FILELIST::$(ls *.json)"
       - name: file list json
+        working-directory: ./artifact
         run: |
           echo "FIELIST"
           echo ${{ steps.finding-files.outputs.FILELIST }}
+          cat ${{ steps.finding-files.outputs.FILELIST }}
 
       # - name: Processing my found files from output
       #   working-directory: ./artifact
