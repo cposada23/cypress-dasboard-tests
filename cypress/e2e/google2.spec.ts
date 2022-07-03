@@ -1,7 +1,7 @@
 describe('title', () => {
   it('should have a title', () => {
     cy.visit('/');
-    cy.title().should('eq', 'Google56');
+    cy.title().should('eq', 'Google');
     cy.log(Cypress.env('CONTAINER') || 'NO_CONTAINER');
 
     cy.get('[name="q"]').type(Cypress.env('container') || 'NO_CONTAINER');
