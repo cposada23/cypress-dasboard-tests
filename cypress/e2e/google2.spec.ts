@@ -9,6 +9,6 @@ describe('This is my first cypress test', () => {
     cy.get('[name="q"]').type(Cypress.env('TEST') || 'NOTEST');
     cy.get('[name="q"]').type(Cypress.env('apiPort') || 'NOapiPort');
     cy.get('[name="q"]').type(Cypress.env('USER') || 'NOUSER');
-    cy.get('[name="q"]').type(Cypress.env('run') || 'NOrun');
+    cy.get('[name="q"]').type(Cypress.env('ORG_ID') || 'NOORG_ID');
   });
 });

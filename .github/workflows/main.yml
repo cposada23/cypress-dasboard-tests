@@ -30,7 +30,10 @@ jobs:
         id: envs
         run: |
           echo "::set-output name=number::hiku"
-          export CYPRESS_run='sifunciona'
+          cypress=$(aws ssm get-parameter --name /${env}/cypress --with-decryption --output text --query "Parameter.Value")
+          cypress='hola'
+          echo "::set-output name=ORG_ID::${cypress}"
+
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
@@ -39,6 +42,8 @@ jobs:
           CYPRESS_container: ${{ matrix.containers }}
           CYPRESS_USER: 'HEHEHEHEHE'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_NUMBER: ${{steps.envs.outputs.number}}
+          CYPRESS_ORG_ID: ${{steps.envs.outputs.ORG_ID}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CYPRESS_TEST: 9876
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
@@ -51,7 +56,6 @@ jobs:
           record: true
           parallel: true
           group: 'Actions example'
-          env: NUMBER=${{steps.envs.outputs.number}}
           config: baseUrl=https://www.google.com/
 
           #  # pass the Dashboard record key as an environment variable
