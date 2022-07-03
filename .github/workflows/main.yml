@@ -35,7 +35,8 @@ jobs:
           echo "::set-output name=number::hiku"
           cypress='hola'
           echo "::set-output name=ORG_ID::${cypress}"
-          echo "::set-output name=projectId::i7f4ow"
+          echo "::set-output name=projectId::${{ secrets.PROJECT_ID }}"
+          echo "project id: :${{ secrets.PROJECT_ID }}"
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
@@ -44,7 +45,6 @@ jobs:
           CYPRESS_container: ${{ matrix.containers }}
           CYPRESS_USER: 'HEHEHEHEHE'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
           CYPRESS_NUMBER: ${{steps.envs.outputs.number}}
           CYPRESS_ORG_ID: ${{steps.envs.outputs.ORG_ID}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
