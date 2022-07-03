@@ -55,7 +55,7 @@ jobs:
           record: true
           parallel: true
           group: 'Actions example'
-          env:
+          env: |
             CONTAINER: ${{steps.envs.outputs.container}}
             NUMBER: ${{steps.envs.outputs.number}}
           # config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
