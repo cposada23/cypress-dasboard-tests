@@ -102,7 +102,7 @@ jobs:
             echo "##########################"
 
             echo "RESULTSSSSSSS"
-            echo $content  | jq -r .|to_entries[]|select(.results=="0")| .file
+            echo $content | jq -r '.|to_entries[]|select(.results=="0")| .file'
           done
       # cat ${{ steps.finding-files.outputs.FILELIST }}
       # - name: Processing my found files from output
