@@ -4,7 +4,5 @@ describe('This is my first cypress test', () => {
     cy.title().should('eq', 'Google');
     cy.log(Cypress.env('CONTAINER') || 'NO_CONTAINER');
     cy.get('[name="q"]').type(Cypress.env('CONTAINER') || 'NO_CONTAINER');
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(2000);
   });
 });

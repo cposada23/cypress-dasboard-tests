@@ -5,6 +5,8 @@ on: [pull_request]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    outputs:
+      results: ${{ steps.cypress-tests.outputs }}
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -54,7 +56,6 @@ jobs:
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # # pass the project ID from the secrets through environment variable
           # CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
-
   cypress-report:
     runs-on: ubuntu-latest
     name: Integration tests reporter
@@ -62,5 +63,8 @@ jobs:
     steps:
       - name: Print Dashboard URL
         run: |
-          echo Cypress finished with: ${{ steps.cypress-tests.outcome }}
+          echo Cypress finished with: ${{  needs.cypress-run.outcome }}
+          echo Cypress finished with: steps.cypress-tests.outcome 
+          echo See results at ${{ needs.cypress-run.outputs.results }}
+          echo See results at ${{ needs.cypress-run.outputs.results.dashboardUrl }}
           echo See results at ${{ steps.cypress-tests.outputs.dashboardUrl }}
