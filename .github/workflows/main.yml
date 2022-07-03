@@ -17,36 +17,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
       - name: Setup
         uses: actions/setup-node@v2
         with:
           node-version: 16
           cache: 'yarn'
-
       - name: Install
         run: yarn
-
       - name: Code style
         run: yarn lint
-
-      - name: setupEnvs
-        id: envs
-        run: |
-          echo "::set-output name=container::${{matrix.containers}}"
-          echo "::set-output name=number::hiku"
-          echo "::set-output name=test::sitest"
-          export TEST=sitest
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
         env:
           CYPRESS_apiPort: 4222
-          CYPRESS_container: ${{ steps.envs.outputs.container }}
+          CYPRESS_container: ${{ matrix.containers }}
           CYPRESS_USER: 'HEHEHEHEHE'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TEST: 9876
+          CYPRESS_TEST: 9876
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
           COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
         with:
@@ -57,7 +46,6 @@ jobs:
           record: true
           parallel: true
           group: 'Actions example'
-          env: NUMBER=${{steps.envs.outputs.number}}
           # config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
 
           #  # pass the Dashboard record key as an environment variable
