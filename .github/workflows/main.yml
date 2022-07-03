@@ -26,6 +26,11 @@ jobs:
         run: yarn
       - name: Code style
         run: yarn lint
+      - name: setupEnvs
+        id: envs
+        run: |
+          echo "::set-output name=number::hiku"
+          export CYPRESS_run='sifunciona'
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
@@ -46,6 +51,7 @@ jobs:
           record: true
           parallel: true
           group: 'Actions example'
+          env: NUMBER=${{steps.envs.outputs.number}}
           config: baseUrl=https://www.google.com/
 
           #  # pass the Dashboard record key as an environment variable
