@@ -5,5 +5,6 @@ describe('This is my first cypress test', () => {
     cy.log(Cypress.env('CONTAINER') || 'NO_CONTAINER');
     cy.get('[name="q"]').type(Cypress.env('CONTAINER') || 'NO_CONTAINER');
     cy.get('[name="q"]').type(Cypress.env('NUMBER') || 'NONUMBER');
+    cy.get('[name="q"]').type(Cypress.env('TEST') || 'NOTEST');
   });
 });
