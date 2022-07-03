@@ -31,6 +31,7 @@ jobs:
         run: yarn lint
 
       - name: UI E2E Tests
+        id: cypress-tests
         uses: cypress-io/github-action@v4
         with:
           config-file: cypress.config.ts
@@ -41,6 +42,7 @@ jobs:
           parallel: true
           group: 'Actions example'
           env: CONTAINER= ${{matrix.containers}}
+          # config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -52,3 +54,7 @@ jobs:
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # # pass the project ID from the secrets through environment variable
           # CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      - name: Print Dashboard URL
+        run: |
+          echo Cypress finished with: ${{ steps.cypress.outcome }}
+          echo See results at ${{ steps.cypress.outputs.dashboardUrl }}
