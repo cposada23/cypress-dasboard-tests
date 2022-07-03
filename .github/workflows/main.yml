@@ -5,7 +5,6 @@ on: [pull_request]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    id: cypress-tests
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -33,6 +32,7 @@ jobs:
 
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
+        id: cypress-tests
         with:
           config-file: cypress.config.ts
           install-command: yarn --immutable
