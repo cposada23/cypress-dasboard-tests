@@ -65,14 +65,15 @@ jobs:
           group: 'Actions example'
           config: baseUrl=https://www.google.com/,projectId=${{steps.envs.outputs.projectId}}
       - name: consolidate
-        uses: actions/upload-artifact@v3
+        # uses: actions/upload-artifact@v3
         if: always()
-        # run: |
-        #   echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }}
-        #   echo $GITHUB_STEP_SUMMARY
-        with:
-          name: mochawesome${{ matrix.containers }}
-          path: cypress/results
+        run: |
+          ls -la ./cypress/results
+          echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }}
+          echo $GITHUB_STEP_SUMMARY
+        # with:
+        #   name: mochawesome${{ matrix.containers }}
+        #   path: cypress/results
 
   # cypress-report:
   #   runs-on: ubuntu-latest
