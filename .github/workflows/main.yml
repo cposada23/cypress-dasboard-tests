@@ -41,12 +41,13 @@ jobs:
         uses: cypress-io/github-action@v4
         id: cypress-tests
         env:
+          CYPRESS_apiPort: 4222
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
+          CYPRESS_USER: HEHEHEHEHE
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEST: ${{steps.envs.outputs.test}}
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
           COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
-
         with:
           config-file: cypress.config.ts
           install-command: yarn --immutable
