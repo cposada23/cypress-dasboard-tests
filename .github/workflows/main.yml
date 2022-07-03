@@ -56,5 +56,5 @@ jobs:
           # CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
       - name: Print Dashboard URL
         run: |
-          echo Cypress finished with: ${{ steps.cypress.outcome }}
-          echo See results at ${{ steps.cypress.outputs.dashboardUrl }}
+          echo Cypress finished with: ${{ steps.cypress-tests.outcome }}
+          echo See results at ${{ steps.cypress-tests.outputs.dashboardUrl }}
