@@ -43,6 +43,7 @@ jobs:
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
+        continue-on-error: true
         env:
           CYPRESS_apiPort: 4222
           CYPRESS_container: ${{ matrix.containers }}
