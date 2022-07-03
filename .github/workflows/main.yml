@@ -44,6 +44,7 @@ jobs:
           env: CONTAINER= ${{matrix.containers}}
           # config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
         env:
+          DEBUG: '@cypress/github-action'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
@@ -55,7 +56,7 @@ jobs:
           # # pass the project ID from the secrets through environment variable
           # CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
       - name: consolidate
-        run: echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }} ${{ toJson(steps.cypress-tests.outputs) }}
+        run: echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }}
   # cypress-report:
   #   runs-on: ubuntu-latest
   #   name: Integration tests reporter
