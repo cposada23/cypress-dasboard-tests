@@ -28,12 +28,15 @@ jobs:
         run: yarn lint
       - name: setupEnvs
         id: envs
-        run: |
-          pwd
-          ls -la
-          echo "::set-output name=number::hiku"
-          cypress='hola'
-          echo "::set-output name=ORG_ID::${cypress}"
+        run:
+          shell: |
+            pwd
+            ls -la
+            echo "::set-output name=number::hiku"
+            cypress='hola'
+            echo "::set-output name=ORG_ID::${cypress}"
+          working-directory: cypress
+
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
