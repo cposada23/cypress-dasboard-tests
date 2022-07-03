@@ -42,6 +42,7 @@ jobs:
           group: 'Actions example'
           env: true
         env:
+          CONTAINER: 'CONTAINER'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
