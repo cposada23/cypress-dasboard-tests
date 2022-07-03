@@ -4,5 +4,6 @@ describe('This is my first cypress test', () => {
     cy.title().should('eq', 'Google');
     cy.log(Cypress.env('CONTAINER') || 'NO_CONTAINER');
     cy.get('[name="q"]').type(Cypress.env('CONTAINER') || 'NO_CONTAINER');
+    cy.get('[name="q"]').type(Cypress.env('NUMBER') || 'NONUMBER');
   });
 });

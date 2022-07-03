@@ -12,8 +12,8 @@ jobs:
       # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
       matrix:
-        # run 3 copies of the current job in parallel
-        containers: [1, 2, 3]
+        # run 2 copies of the current job in parallel
+        containers: [1, 2]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -41,10 +41,11 @@ jobs:
           record: true
           parallel: true
           group: 'Actions example'
-          env: CONTAINER= ${{matrix.containers}}
+          env: |
+            CONTAINER= ${{matrix.containers}}
+            NUMBER=2223455
           # config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
         env:
-          DEBUG: '@cypress/github-action'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
