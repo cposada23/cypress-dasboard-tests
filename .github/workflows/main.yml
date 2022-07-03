@@ -93,11 +93,6 @@ jobs:
         run: |
           files=(*)
           echo "${files[@]}"
-          echo "::set-output name=FILELIST::files"
-      - name: file list json
-        working-directory: ./artifact
-        run: |
-          echo "FIELIST"
           for file in "${files[@]}"; do
             echo "##########################"
             echo "$file"
