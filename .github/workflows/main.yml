@@ -14,8 +14,6 @@ jobs:
       matrix:
         # run 2 copies of the current job in parallel
         containers: [1, 2]
-    env:
-      TEST: SITESTS
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -38,6 +36,7 @@ jobs:
           echo "::set-output name=container::${{matrix.containers}}"
           echo "::set-output name=number::hiku"
           echo "::set-output name=test::sitest"
+          export TEST=sitest
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
