@@ -41,7 +41,9 @@ jobs:
           record: true
           parallel: true
           group: 'Actions example'
-          env: CONTAINER= ${{matrix.containers}},NUMBER=holi
+          env: |
+            CONTAINER=${{matrix.containers}},
+            NUMBER=holi
           # config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
