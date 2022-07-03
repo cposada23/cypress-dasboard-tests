@@ -100,9 +100,9 @@ jobs:
             echo "STATSSSSSSSSSJLJDLAKSJDLAKJDFKLÑAJFHLIUEHLKJSDNVLÑIKASDJUFGHUÑKLSEHKOÑSWDEUIH"
             echo $content | jq  -r '.stats'
             echo "##########################"
-
             echo "RESULTSSSSSSS"
-            echo $content | jq -r '.|to_entries[]|select(.results=="0")| .file'
+            echo $content | jq -r '.|results[]|select(.key=="0")| .file'
+            echo "##########################"
           done
       # cat ${{ steps.finding-files.outputs.FILELIST }}
       # - name: Processing my found files from output
