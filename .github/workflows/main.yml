@@ -33,8 +33,8 @@ jobs:
       - name: setupEnvs
         id: envs
         run: |
-          echo "::set-output name=container::${{matrix.containers}}\n"
-          echo "::set-output name=number::hiku\n"
+          echo "::set-output name=container::${{matrix.containers}}"
+          echo "::set-output name=number::hiku"
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
