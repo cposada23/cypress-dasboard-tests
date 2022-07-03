@@ -75,10 +75,15 @@ jobs:
         #   name: mochawesome${{ matrix.containers }}
         #   path: cypress/results
 
-  # cypress-report:
-  #   runs-on: ubuntu-latest
-  #   name: Integration tests reporter
-  #   needs: [cypress-run]
+  cypress-report:
+    runs-on: ubuntu-latest
+    name: Integration tests reporter
+    needs: [cypress-run]
+    steps:
+      - name: list files
+        run: |
+          echo "listing files"
+          ls -la
   #   steps:
   #     - name: Print Dashboard URL
   #       run: |
