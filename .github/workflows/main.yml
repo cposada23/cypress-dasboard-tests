@@ -65,12 +65,14 @@ jobs:
           group: 'Actions example'
           config: baseUrl=https://www.google.com/,projectId=${{steps.envs.outputs.projectId}}
       - name: consolidate
-        uses: actions/upload-artifact@v3
+        # uses: actions/upload-artifact@v3
         if: steps.cypress-tests.outcome == 'failure'
-        # run: echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }}
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
+        run: |
+          echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }}
+          echo $GITHUB_STEP_SUMMARY
+        # with:
+        #   name: cypress-screenshots
+        #   path: cypress/screenshots
 
   # cypress-report:
   #   runs-on: ubuntu-latest
