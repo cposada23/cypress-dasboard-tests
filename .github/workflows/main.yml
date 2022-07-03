@@ -43,10 +43,10 @@ jobs:
         env:
           CYPRESS_apiPort: 4222
           CYPRESS_container: ${{ steps.envs.outputs.container }}
+          CYPRESS_USER: 'HEHEHEHEHE'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          CYPRESS_USER: HEHEHEHEHE
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TEST: ${{steps.envs.outputs.test}}
+          TEST: 9876
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
           COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
         with:
