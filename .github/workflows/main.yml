@@ -98,7 +98,7 @@ jobs:
             echo "$file"
             content = cat "$file"
             echo "STATSSSSSSSSSJLJDLAKSJDLAKJDFKLÑAJFHLIUEHLKJSDNVLÑIKASDJUFGHUÑKLSEHKOÑSWDEUIH"
-            echo content | jq  -r '.stats'
+            echo $content | jq  -r '.stats'
             echo "##########################"
           done
       # cat ${{ steps.finding-files.outputs.FILELIST }}
