@@ -35,15 +35,17 @@ jobs:
         run: |
           echo "::set-output name=container::${{matrix.containers}}"
           echo "::set-output name=number::hiku"
+          echo "::set-output name=test::sitest"
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
-          COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
-          TEST: SITEST
+          TEST: ${{steps.envs.outputs.test}}
+          # COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
+          # COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
+
         with:
           config-file: cypress.config.ts
           install-command: yarn --immutable
