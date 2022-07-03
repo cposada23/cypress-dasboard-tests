@@ -80,13 +80,15 @@ jobs:
     name: Integration tests reporter
     needs: [cypress-run]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      # - name: Checkout
+      #   uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
           name: mochawesome
+          path: artifact/
       - run: ls .
       - name: list files
+        working-directory: ./artifact
         run: |
           echo "listing files"
           ls -la
