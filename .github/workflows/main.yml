@@ -91,14 +91,20 @@ jobs:
         working-directory: ./artifact
         id: finding-files
         run: |
-          echo "::set-output name=FILELIST::$(ls *.json)"
+          files=(*)
+          echo "${files[@]}"
+          echo "::set-output name=FILELIST::files"
       - name: file list json
         working-directory: ./artifact
         run: |
           echo "FIELIST"
-          echo ${{ steps.finding-files.outputs.FILELIST }}
-          cat ${{ steps.finding-files.outputs.FILELIST }}
-
+          for file in "${files[@]}"; do
+            echo "##########################"
+            echo "$file"
+            cat "$file"
+            echo "##########################"
+          done
+      # cat ${{ steps.finding-files.outputs.FILELIST }}
       # - name: Processing my found files from output
       #   working-directory: ./artifact
       #   run: |
@@ -128,3 +134,5 @@ jobs:
   #         echo See results at ${{ needs.cypress-run.outputs.results }}
   #         echo See results at ${{ needs.cypress-run.outputs.results.dashboardUrl }}
   #         echo See results at ${{ steps.cypress-tests.outputs.dashboardUrl }}
+
+# echo ${{ steps.finding-files.outputs.FILELIST }}
