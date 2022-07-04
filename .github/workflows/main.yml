@@ -104,6 +104,16 @@ jobs:
           name: mochawesome
           path: artifact/
       - run: ls -R
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            var files = fs.readdirSync('./artifact');
+            const { execSync } = require('child_process');
+            const output = execSync('ls', { encoding: 'utf-8' });
+            console.log('The output is:');
+            console.log(output);
+            console.log(files);
       - name: other way
         working-directory: ./artifact
         run: |
