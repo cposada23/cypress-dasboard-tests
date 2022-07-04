@@ -72,6 +72,7 @@ jobs:
           echo "### Hello world! :rocket:" >> test-result${{matrix.containers}}.md
           echo "There must be a new file"
       - uses: actions/github-script@v6
+        if: steps.cypress-tests.outcome == 'failure'
         with:
           script: |
             const fs = require('fs');
