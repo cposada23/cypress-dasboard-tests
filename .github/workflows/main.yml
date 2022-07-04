@@ -64,13 +64,13 @@ jobs:
           parallel: true
           group: 'Runs'
           config: baseUrl=https://www.google.com/,projectId=${{steps.envs.outputs.projectId}}
-      - name: generate output files
-        if: steps.cypress-tests.outcome == 'failure'
-        working-directory: ./cypress/results
-        run: |
-          touch test-result${{matrix.containers}}.md
-          echo "### Hello world! :rocket:" >> test-result${{matrix.containers}}.md
-          echo "There must be a new file"
+      # - name: generate output files
+      #   if: steps.cypress-tests.outcome == 'failure'
+      #   working-directory: ./cypress/results
+      #   run: |
+      #     touch test-result${{matrix.containers}}.md
+      #     echo "### Hello world! :rocket:" >> test-result${{matrix.containers}}.md
+      #     echo "There must be a new file"
       # - uses: actions/github-script@v6
       #   if: steps.cypress-tests.outcome == 'failure'
       #   with:
