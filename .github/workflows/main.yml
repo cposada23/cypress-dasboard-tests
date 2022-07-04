@@ -107,9 +107,9 @@ jobs:
       - uses: actions/cache@v2
         id: restore-build
         with:
-          path: ./cache
+          path: ./cypress/results
           key: ${{ github.sha }}
-      - run: ls .next
+      - run: ls -R
       - uses: actions/download-artifact@v3
         with:
           name: mochawesome
