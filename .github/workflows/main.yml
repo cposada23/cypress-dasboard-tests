@@ -74,7 +74,10 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            const fs = require('fs');
+            const files = fs.readdirSync('/cypress/results');
             console.log("HOLE");
+            console.log(files);
       - name: consolidate
         uses: actions/upload-artifact@v3
         if: always()
