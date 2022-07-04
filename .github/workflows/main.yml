@@ -8,6 +8,8 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    outputs:
+      dashboardUrl: ${{ steps.cypress-tests.outputs.dashboardUrl }}
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -135,28 +137,26 @@ jobs:
                 <td>%skipped%</td>
               </tr>
             </table>
-            <a href="%dashboard-url%">View Run in Dashboard</a>`
+            `
             let result = '<h2>Cypress Results</h2>';
             try {
               // If there is files here is because a test failed
               const files = fs.readdirSync('./artifact');
               files.forEach(file => {
+                console.log(`File: ${file}`);
                 const jsonFile = JSON.parse(fs.readFileSync(`./artifact/${file}`));
                 const spec = jsonFile['results'][0]['file'];
                 const failures = (jsonFile['results'][0]['suites'][0]['failures']).length;
-                const passes = (jsonFile['results'][0]['suites'][0]['passes']).length;
-                const skipped = (jsonFile['results'][0]['suites'][0]['skipped']).length;
-                console.log(spec)
-                console.log(`Failures ${failures}`);
-                console.log(`passes ${passes}`);
-                console.log(`skipped ${skipped}`);
-                result += template
+                if(failures > 0) {
+                  const passes = (jsonFile['results'][0]['suites'][0]['passes']).length;
+                  const skipped = (jsonFile['results'][0]['suites'][0]['skipped']).length;
+                  result += template
                             .replace('%spec-file%', spec)
                             .replace('%passed%', passes)
                             .replace('%failed%', failures)
                             .replace('%skipped%', skipped);
-              })
-              console.log(result);
+                }  
+              });
             } catch (error) {
               console.error(error);
               result = "No-Errors";
@@ -166,6 +166,8 @@ jobs:
       - name: generate summary
         run: |
           echo -e "${{steps.generate-output.outputs.result}}" >> $GITHUB_STEP_SUMMARY
+          echo -e "<a href="${{needs.cypress-run.outputs.dashboardUrl}}">View Run in Dashboard</a>" >> $GITHUB_STEP_SUMMARY
+
       # - name: other way
       #   working-directory: ./artifact
       #   run: |
