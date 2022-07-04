@@ -68,7 +68,7 @@ jobs:
         if: steps.cypress-tests.outcome == 'failure'
         working-directory: ./cypress/results
         run: |
-          touch test-result${{matrix.containers}}.txt
+          touch test-result${{matrix.containers}}.txt << test
           ls
           echo "There must be a new file"
       - name: consolidate
@@ -93,6 +93,15 @@ jobs:
           name: mochawesome
           path: artifact/
       - run: ls -R
+      - name: other way
+        working-directory: ./artifact
+        run: |
+          for filename in $(ls test-result*.txt); do
+            echo "FILENAME"
+            echo $filename
+            echo "CAT"
+            cat $filename
+          done;
       - name: list files and store them
         working-directory: ./artifact
         id: finding-files
