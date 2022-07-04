@@ -15,7 +15,7 @@ jobs:
       # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
       matrix:
-        # run 2 copies of the current job in parallel
+        # run #of copies of the current job in parallel
         containers: [1, 2, 3]
     steps:
       - name: Checkout
@@ -62,11 +62,19 @@ jobs:
           headless: true
           record: true
           parallel: true
-          group: 'Actions example'
+          group: 'Runs'
           config: baseUrl=https://www.google.com/,projectId=${{steps.envs.outputs.projectId}}
+      - name: generate output files
+        if: steps.cypress-tests.outcome == 'failure'
+        working-directory: ./cypress/results
+        run: |
+          touch test-result${{matrix.containers}}.txt
+          ls
+          echo "There must be a new file"
       - name: consolidate
         uses: actions/upload-artifact@v3
         if: always()
+        # if: steps.cypress-tests.outcome == 'failure'
         # run: |
         #   ls -la ./cypress/results
         #   echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }}
@@ -75,13 +83,11 @@ jobs:
           name: mochawesome
           path: cypress/results
 
-  cypress-report:
+  teams-notifications:
     runs-on: ubuntu-latest
     name: Integration tests reporter
     needs: [cypress-run]
     steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
           name: mochawesome
@@ -107,28 +113,15 @@ jobs:
             echo $content | jq -r '.results[0]| .suites[0] | .failures'
             echo "##########################"
           done
-      # cat ${{ steps.finding-files.outputs.FILELIST }}
-      # - name: Processing my found files from output
-      #   working-directory: ./artifact
+      # echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
+      # - name: Generate list using Markdown
       #   run: |
-      #     echo "FILELIST"
-      #     echo ${{ steps.finding-files.outputs.FILELIST }}
-      #     content=cat ${{steps.finding-files.outputs.FILELIST}}
-      #     # the following lines are only required for multi line json
-      #     content="${content//'%'/'%25'}"
-      #     content="${content//$'\n'/'%0A'}"
-      #     content="${content//$'\r'/'%0D'}"
-      #     # end of optional handling for multi line json
-      #     echo "::set-output name=packageJson::$content"
-      #     echo "DONE"
-      # IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
-      # for i in "${myarray[@]}"; do
-      #   file_path=$(dirname "${i}")
-      #   file_name=$(basename "${i}")
-      #   cd file_path
-      #   cat file_name
-      # done
-      # echo "DONE"
+      # echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+      #     echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
+      #     echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+      #     echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
+      #     echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
+      #     echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY
   #   steps:
   #     - name: Print Dashboard URL
   #       run: |
