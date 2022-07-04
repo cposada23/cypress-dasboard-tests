@@ -165,7 +165,7 @@ jobs:
           result-encoding: string
       - name: generate summary
         run: |
-          echo echo ${{steps.generate-output.outputs.result}} >> $GITHUB_STEP_SUMMARY
+          echo -e ${{steps.generate-output.outputs.result}} >> $GITHUB_STEP_SUMMARY
       # - name: other way
       #   working-directory: ./artifact
       #   run: |
