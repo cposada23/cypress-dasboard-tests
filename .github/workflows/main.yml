@@ -71,12 +71,10 @@ jobs:
           touch test-result${{matrix.containers}}.md
           echo "### Hello world! :rocket:" >> test-result${{matrix.containers}}.md
           echo "There must be a new file"
-      - name: Setup
-        uses: actions/github-script@v6
-        working-directory: ./cypress/results
+      - uses: actions/github-script@v6
         with:
           script: |
-            console.log('THIS WORKS');
+            console.log("HOLE");
       - name: consolidate
         uses: actions/upload-artifact@v3
         if: always()
