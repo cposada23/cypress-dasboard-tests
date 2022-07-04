@@ -83,8 +83,8 @@ jobs:
             console.log(files);
       - name: consolidate
         uses: actions/upload-artifact@v3
-        if: always()
-        # if: steps.cypress-tests.outcome == 'failure'
+        # if: always()
+        if: steps.cypress-tests.outcome == 'failure'
         # run: |
         #   ls -la ./cypress/results
         #   echo result for ${{ matrix.containers }} ${{ steps.cypress-tests.outcome }}
