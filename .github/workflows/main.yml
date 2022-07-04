@@ -71,9 +71,9 @@ jobs:
           touch test-result${{matrix.containers}}.md
           echo "### Hello world! :rocket:" >> test-result${{matrix.containers}}.md
           echo "There must be a new file"
-      - name: jscript
-        working-directory: ./cypress/results
+      - name: Setup
         uses: actions/github-script@v6
+        working-directory: ./cypress/results
         with:
           script: |
             console.log('THIS WORKS');
