@@ -159,7 +159,7 @@ jobs:
               });
             } catch (error) {
               console.error(error);
-              result += <br><h3>Passed :white_check_mark:</h3>;
+              result += '<br><h3>Passed :white_check_mark:</h3>';
             }
             return result.replace(/[\r\n]/gm, '');
           result-encoding: string
