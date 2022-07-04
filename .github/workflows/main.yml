@@ -159,12 +159,13 @@ jobs:
               });
             } catch (error) {
               console.error(error);
-              result = "No-Errors";
+              result += <br><h3>Passed :white_check_mark:</h3>;
             }
             return result.replace(/[\r\n]/gm, '');
           result-encoding: string
       - name: generate summary
         run: |
+          echo "CYPRESS DASHBOARD: ${{needs.cypress-run.outputs.dashboardUrl}}"
           echo -e "${{steps.generate-output.outputs.result}}" >> $GITHUB_STEP_SUMMARY
           echo -e "<a href="${{needs.cypress-run.outputs.dashboardUrl}}">View Run in Dashboard</a>" >> $GITHUB_STEP_SUMMARY
 
