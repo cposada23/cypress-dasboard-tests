@@ -105,6 +105,7 @@ jobs:
           path: artifact/
       - run: ls -R
       - uses: actions/github-script@v6
+        id: generate-output
         with:
           script: |
             const fs = require('fs');
@@ -114,10 +115,13 @@ jobs:
             console.log('The output is:');
             console.log(output);
             console.log(files);
+            return "jello"
+          result-encoding: string
       - name: other way
         working-directory: ./artifact
         run: |
           echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
+          echo ${{steps.generate-output.outputs.result}} >> $GITHUB_STEP_SUMMARY
           for filename in $(ls test-result*.md); do
             echo "FILENAME"
             echo $filename
