@@ -97,7 +97,7 @@ jobs:
         working-directory: ./artifact
         run: |
           echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
-          for filename in $(ls test-result*.txt); do
+          for filename in $(ls test-result*.md); do
             echo "FILENAME"
             echo $filename
             echo "CAT"
