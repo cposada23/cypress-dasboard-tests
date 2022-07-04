@@ -161,7 +161,7 @@ jobs:
               console.error(error);
               result = "No-Errors";
             }
-            return result;
+            return result.replace(/[\r\n]/gm, '');
           result-encoding: string
       - name: generate summary
         run: |
