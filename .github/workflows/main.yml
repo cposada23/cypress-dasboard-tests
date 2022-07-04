@@ -84,6 +84,11 @@ jobs:
       #       console.log('The output is:');
       #       console.log(output);
       #       console.log(files);
+      - name: print dashboard url
+        run: |
+          echo "${{steps.envs.outputs.projectId}}"
+          echo "DASHBOARD URL"
+          echo "${{steps.cypress-tests.outputs.dashboardUrl}}"
       - name: consolidate
         uses: actions/upload-artifact@v3
         # if: always()
