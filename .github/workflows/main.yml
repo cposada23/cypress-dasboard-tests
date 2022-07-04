@@ -68,8 +68,8 @@ jobs:
         if: steps.cypress-tests.outcome == 'failure'
         working-directory: ./cypress/results
         run: |
-          touch test-result${{matrix.containers}}.txt << test
-          ls
+          touch test-result${{matrix.containers}}.md
+          echo "### Hello world! :rocket:" >> test-result${{matrix.containers}}.md
           echo "There must be a new file"
       - name: consolidate
         uses: actions/upload-artifact@v3
@@ -96,11 +96,12 @@ jobs:
       - name: other way
         working-directory: ./artifact
         run: |
+          echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
           for filename in $(ls test-result*.txt); do
             echo "FILENAME"
             echo $filename
             echo "CAT"
-            cat $filename
+            cat $filename >> $GITHUB_STEP_SUMMARY
           done;
       - name: list files and store them
         working-directory: ./artifact
