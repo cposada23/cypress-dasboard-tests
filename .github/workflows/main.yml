@@ -9,7 +9,7 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     outputs:
-      dashboardUrl: ${{ steps.cypress-tests.outputs.dashboardUrl }}
+      dashboardUrl: ${{steps.cypress-tests.outputs.dashboardUrl}}
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
