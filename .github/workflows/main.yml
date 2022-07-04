@@ -93,12 +93,23 @@ jobs:
         with:
           name: mochawesome
           path: cypress/results
+      - uses: actions/cache@v2
+        id: restore-build
+        with:
+          path: ./cypress/results
+          key: ${{ github.sha }}
 
   teams-notifications:
     runs-on: ubuntu-latest
-    name: Integration tests reporter
+    name: Test Results
     needs: [cypress-run]
     steps:
+      - uses: actions/cache@v2
+        id: restore-build
+        with:
+          path: ./cache
+          key: ${{ github.sha }}
+      - run: ls .next
       - uses: actions/download-artifact@v3
         with:
           name: mochawesome
