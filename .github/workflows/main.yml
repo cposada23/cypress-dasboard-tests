@@ -71,17 +71,17 @@ jobs:
           touch test-result${{matrix.containers}}.md
           echo "### Hello world! :rocket:" >> test-result${{matrix.containers}}.md
           echo "There must be a new file"
-      - uses: actions/github-script@v6
-        if: steps.cypress-tests.outcome == 'failure'
-        with:
-          script: |
-            const fs = require('fs');
-            var files = fs.readdirSync('./cypress/results/');
-            const { execSync } = require('child_process');
-            const output = execSync('ls', { encoding: 'utf-8' });
-            console.log('The output is:');
-            console.log(output);
-            console.log(files);
+      # - uses: actions/github-script@v6
+      #   if: steps.cypress-tests.outcome == 'failure'
+      #   with:
+      #     script: |
+      #       const fs = require('fs');
+      #       var files = fs.readdirSync('./cypress/results/');
+      #       const { execSync } = require('child_process');
+      #       const output = execSync('ls', { encoding: 'utf-8' });
+      #       console.log('The output is:');
+      #       console.log(output);
+      #       console.log(files);
       - name: consolidate
         uses: actions/upload-artifact@v3
         # if: always()
@@ -93,23 +93,23 @@ jobs:
         with:
           name: mochawesome
           path: cypress/results
-      - uses: actions/cache@v2
-        id: restore-build
-        with:
-          path: ./*
-          key: ${{ github.sha }}
+      # - uses: actions/cache@v2
+      #   id: restore-build
+      #   with:
+      #     path: ./*
+      #     key: ${{ github.sha }}
 
   teams-notifications:
     runs-on: ubuntu-latest
     name: Test Results
     needs: [cypress-run]
     steps:
-      - uses: actions/cache@v2
-        id: restore-build
-        with:
-          path: ./*
-          key: ${{ github.sha }}
-      - run: ls -R
+      # - uses: actions/cache@v2
+      #   id: restore-build
+      #   with:
+      #     path: ./*
+      #     key: ${{ github.sha }}
+      # - run: ls -R
       - uses: actions/download-artifact@v3
         with:
           name: mochawesome
@@ -120,27 +120,65 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            var files = fs.readdirSync('./artifact');
-            const { execSync } = require('child_process');
-            const output = execSync('ls', { encoding: 'utf-8' });
-            console.log('The output is:');
-            console.log(output);
-            console.log(files);
-            return "jello"
+            let template = `
+            <table>
+              <tr>
+                <th>Spec File</th>
+                <th>Passed :white_check_mark:</th>
+                <th>Failed :x:</th>
+                <th>Skipped :leftwards_arrow_with_hook:</th>
+              </tr>
+              <tr>
+                <td>%spec-file%</td>
+                <td>%passed%</td>
+                <td>%failed%</td>
+                <td>%skipped%</td>
+              </tr>
+            </table>
+            <a href="%dashboard-url%">View Run in Dashboard</a>`
+            let result = '<h2>Cypress Results</h2>';
+            try {
+              // If there is files here is because a test failed
+              const files = fs.readdirSync('./artifact');
+              files.forEach(file => {
+                const jsonFile = JSON.parse(fs.readFileSync(`./artifact/${file}`));
+                const spec = jsonFile['results'][0]['file'];
+                const failures = (jsonFile['results'][0]['suites'][0]['failures']).length;
+                const passes = (jsonFile['results'][0]['suites'][0]['passes']).length;
+                const skipped = (jsonFile['results'][0]['suites'][0]['skipped']).length;
+                console.log(spec)
+                console.log(`Failures ${failures}`);
+                console.log(`passes ${passes}`);
+                console.log(`skipped ${skipped}`);
+                result += template
+                            .replace('%spec-file%', spec)
+                            .replace('%passed%', passes)
+                            .replace('%failed%', failures)
+                            .replace('%skipped%', skipped);
+              })
+              console.log(result);
+            } catch (error) {
+              console.error(error);
+              result = "No-Errors";
+            }
+            return result;
           result-encoding: string
-      - name: other way
-        working-directory: ./artifact
+      - name: generate summary
         run: |
-          echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
-          echo ${{steps.generate-output.outputs.result}} >> $GITHUB_STEP_SUMMARY
-          for filename in $(ls test-result*.md); do
-            echo "FILENAME"
-            echo $filename
-            echo "CAT"
-            content=`cat "$filename"`
-            echo $filename >> $GITHUB_STEP_SUMMARY
-            echo $content >> $GITHUB_STEP_SUMMARY
-          done;
+          echo echo ${{steps.generate-output.outputs.result}} >> $GITHUB_STEP_SUMMARY
+      # - name: other way
+      #   working-directory: ./artifact
+      #   run: |
+      #     echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
+      #     echo ${{steps.generate-output.outputs.result}} >> $GITHUB_STEP_SUMMARY
+      #     for filename in $(ls test-result*.md); do
+      #       echo "FILENAME"
+      #       echo $filename
+      #       echo "CAT"
+      #       content=`cat "$filename"`
+      #       echo $filename >> $GITHUB_STEP_SUMMARY
+      #       echo $content >> $GITHUB_STEP_SUMMARY
+      #     done;
       # - name: list files and store them
       #   working-directory: ./artifact
       #   id: finding-files
