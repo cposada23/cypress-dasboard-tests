@@ -101,28 +101,30 @@ jobs:
             echo "FILENAME"
             echo $filename
             echo "CAT"
-            cat $filename >> $GITHUB_STEP_SUMMARY
+            content=`cat "$filename"`
+            echo $filename >> $GITHUB_STEP_SUMMARY
+            echo $content >> $GITHUB_STEP_SUMMARY
           done;
-      - name: list files and store them
-        working-directory: ./artifact
-        id: finding-files
-        run: |
-          files=(*)
-          echo "${files[@]}"
-          for file in "${files[@]}"; do
-            echo "##########################"
-            echo "$file"
-            content=`cat "$file"`
-            echo "STATSSSSSSSSSJLJDLAKSJDLAKJDFKLÑAJFHLIUEHLKJSDNVLÑIKASDJUFGHUÑKLSEHKOÑSWDEUIH"
-            echo $content | jq  -r '.stats'
-            echo "##########################"
-            echo "RESULTSSSSSSS"
-            echo $content | jq -r '.results[0]| .file'
-            echo "##########################"
-            echo "FAILINGSSSSSS"
-            echo $content | jq -r '.results[0]| .suites[0] | .failures'
-            echo "##########################"
-          done
+      # - name: list files and store them
+      #   working-directory: ./artifact
+      #   id: finding-files
+      #   run: |
+      #     files=(*)
+      #     echo "${files[@]}"
+      #     for file in "${files[@]}"; do
+      #       echo "##########################"
+      #       echo "$file"
+      #       content=`cat "$file"`
+      #       echo "STATSSSSSSSSSJLJDLAKSJDLAKJDFKLÑAJFHLIUEHLKJSDNVLÑIKASDJUFGHUÑKLSEHKOÑSWDEUIH"
+      #       echo $content | jq  -r '.stats'
+      #       echo "##########################"
+      #       echo "RESULTSSSSSSS"
+      #       echo $content | jq -r '.results[0]| .file'
+      #       echo "##########################"
+      #       echo "FAILINGSSSSSS"
+      #       echo $content | jq -r '.results[0]| .suites[0] | .failures'
+      #       echo "##########################"
+      #     done
       # echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
       # - name: Generate list using Markdown
       #   run: |
