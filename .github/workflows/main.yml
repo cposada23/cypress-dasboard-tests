@@ -75,8 +75,10 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const files = fs.readdirSync('/cypress/results');
-            console.log("HOLE");
+            const { execSync } = require('child_process');
+            const output = execSync('ls', { encoding: 'utf-8' });
+            console.log('The output is:');
+            console.log(output);
             console.log(files);
       - name: consolidate
         uses: actions/upload-artifact@v3
