@@ -11,3 +11,5 @@ jobs:
       env: qa
       project-id: i7f4ow
       env-url: https://www.google.com/
+    secrets:
+      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
