@@ -1,0 +1,13 @@
+name: Build tests
+on:
+  push:
+    branches:
+      - test-dashboard
+jobs:
+  test-qa:
+    name: Test in qa
+    uses: cposada23/cypress-dasboard-tests/.github/workflows/main.yml
+    with:
+      env: qa
+      project-id: i7f4ow
+      env-url: https://www.google.com/

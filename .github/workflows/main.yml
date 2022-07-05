@@ -1,9 +1,17 @@
-name: Continuous integration
+name: Cypress tests
 
 on:
-  push:
-    branches:
-      - test-dashboard
+  workflow_call:
+    inputs:
+      env:
+        required: true
+        type: string
+      project-id:
+        required: true
+        type: string
+      env-url:
+        required: true
+        type: string
 
 jobs:
   cypress-run:
@@ -65,7 +73,7 @@ jobs:
           record: true
           parallel: true
           group: 'Runs'
-          config: baseUrl=https://www.google.com/,projectId=${{steps.envs.outputs.projectId}}
+          config: baseUrl=${{ inputs.env-url }},projectId=${{ inputs.project-id }}
       # - name: generate output files
       #   if: steps.cypress-tests.outcome == 'failure'
       #   working-directory: ./cypress/results
