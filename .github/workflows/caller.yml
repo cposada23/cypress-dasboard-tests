@@ -6,7 +6,7 @@ on:
 jobs:
   test-qa:
     name: Test in qa
-    uses: cposada23/cypress-dasboard-tests/.github/workflows/main.yml@main
+    uses: cposada23/cypress-dasboard-tests/.github/workflows/main.yml@test-dashboard
     with:
       env: qa
       project-id: i7f4ow
