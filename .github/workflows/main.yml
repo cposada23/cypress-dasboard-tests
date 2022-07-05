@@ -101,7 +101,7 @@ jobs:
           echo "${{steps.envs.outputs.projectId}}"
           echo "DASHBOARD URL"
           echo "${{steps.cypress-tests.outputs.dashboardUrl}}"
-      - name: consolidate
+      - name: save artifacts for notification job
         uses: actions/upload-artifact@v3
         # if: always()
         if: steps.cypress-tests.outcome == 'failure'
@@ -130,6 +130,7 @@ jobs:
       #     key: ${{ github.sha }}
       # - run: ls -R
       - uses: actions/download-artifact@v3
+        continue-on-error: true
         with:
           name: mochawesome
           path: artifact/
