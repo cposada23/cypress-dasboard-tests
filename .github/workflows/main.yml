@@ -58,6 +58,7 @@ jobs:
         id: cypress-tests
         continue-on-error: true
         env:
+          SUMMARY_ENV_VAR: false
           CYPRESS_apiPort: 4222
           CYPRESS_container: ${{ matrix.containers }}
           CYPRESS_USER: 'HEHEHEHEHE'
