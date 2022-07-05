@@ -12,6 +12,9 @@ on:
       env-url:
         required: true
         type: string
+    secrets:
+      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   cypress-run:
@@ -48,8 +51,8 @@ jobs:
           echo "::set-output name=number::hiku"
           cypress='hola'
           echo "::set-output name=ORG_ID::${cypress}"
-          echo "::set-output name=projectId::${{ secrets.PROJECT_ID }}"
-          echo "project id: :${{ secrets.PROJECT_ID }}"
+          echo "::set-output name=projectId::${{ inputs.project-id }}"
+          echo "project id: :${{ inputs.project-id }}"
       - name: UI E2E Tests
         uses: cypress-io/github-action@v4
         id: cypress-tests
