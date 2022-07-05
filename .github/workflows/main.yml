@@ -13,7 +13,8 @@ on:
         required: true
         type: string
     secrets:
-      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
+      CYPRESS_RECORD_KEY:
+        required: true
 
 jobs:
   cypress-run:
