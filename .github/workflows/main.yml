@@ -70,7 +70,6 @@ jobs:
           config-file: cypress.config.ts
           install-command: yarn --immutable
           browser: chrome
-          headless: true
           record: true
           parallel: true
           group: 'Runs'

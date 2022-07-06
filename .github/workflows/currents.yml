@@ -44,5 +44,6 @@ jobs:
       - name: Run Cypress test on Currents.dev
         uses: cypress-io/github-action@v2
         with:
+          config-file: cypress.config.ts
           config: baseUrl=${{ inputs.env-url }},projectId=${{ inputs.project-id }}
           command: yarn currents run --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"

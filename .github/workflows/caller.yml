@@ -5,7 +5,7 @@ on:
       - test-dashboard
 jobs:
   test-currents:
-    name: Test in qa
+    name: Test in currents
     uses: cposada23/cypress-dasboard-tests/.github/workflows/currents.yml@test-dashboard
     with:
       env: qa
@@ -22,11 +22,11 @@ jobs:
   #     env-url: https://www.google.com/
   #   secrets:
   #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
-  test-pro:
-    name: Test in knapsackPro
-    uses: cposada23/cypress-dasboard-tests/.github/workflows/knapsackpro.yml@test-dashboard
-    with:
-      env: qa
-      env-url: https://www.google.com
-    secrets:
-      KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
+  # test-pro:
+  #   name: Test in knapsackPro
+  #   uses: cposada23/cypress-dasboard-tests/.github/workflows/knapsackpro.yml@test-dashboard
+  #   with:
+  #     env: qa
+  #     env-url: https://www.google.com
+  #   secrets:
+  #     KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
