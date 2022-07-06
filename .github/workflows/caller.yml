@@ -4,6 +4,15 @@ on:
     branches:
       - test-dashboard
 jobs:
+  test-currents:
+    name: Test in qa
+    uses: cposada23/cypress-dasboard-tests/.github/workflows/currents.yml@test-dashboard
+    with:
+      env: qa
+      project-id: rx6InO
+      env-url: https://www.google.com/
+    secrets:
+      CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY}}
   # test-qa:
   #   name: Test in qa
   #   uses: cposada23/cypress-dasboard-tests/.github/workflows/main.yml@test-dashboard
