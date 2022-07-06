@@ -47,4 +47,4 @@ jobs:
           config-file: cypress.config.ts
           browser: chrome
           config: baseUrl=${{ inputs.env-url }},projectId=${{ inputs.project-id }}
-          command: yarn currents run --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}"
+          command: yarn currents run --record --parallel --key ${{ secrets.CURRENTS_RECORD_KEY }} --ci-build-id "${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --browser chrome"
