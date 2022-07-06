@@ -4,12 +4,20 @@ on:
     branches:
       - test-dashboard
 jobs:
-  test-qa:
-    name: Test in qa
-    uses: cposada23/cypress-dasboard-tests/.github/workflows/main.yml@test-dashboard
+  # test-qa:
+  #   name: Test in qa
+  #   uses: cposada23/cypress-dasboard-tests/.github/workflows/main.yml@test-dashboard
+  #   with:
+  #     env: qa
+  #     project-id: i7f4ow
+  #     env-url: https://www.google.com/
+  #   secrets:
+  #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
+  test-pro:
+    name: Test in knapsackPro
+    uses:
     with:
       env: qa
-      project-id: i7f4ow
-      env-url: https://www.google.com/
+      env-url: https://www.google.com
     secrets:
-      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
+      KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
