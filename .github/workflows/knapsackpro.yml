@@ -1,4 +1,4 @@
-name: Cypress tests
+name: KnapSackPro
 
 on:
   workflow_call:

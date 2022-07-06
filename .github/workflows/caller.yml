@@ -15,7 +15,7 @@ jobs:
   #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY}}
   test-pro:
     name: Test in knapsackPro
-    uses:
+    uses: cposada23/cypress-dasboard-tests/.github/workflows/knapsackpro.yml@test-dashboard
     with:
       env: qa
       env-url: https://www.google.com
