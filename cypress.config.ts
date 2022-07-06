@@ -11,6 +11,7 @@ export default defineConfig({
     screenshotOnRunFailure: true,
     video: true,
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
+    projectId: 'rx6InO',
     reporter: 'mochawesome',
     reporterOptions: {
       reportDir: 'cypress/results',
