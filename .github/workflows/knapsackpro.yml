@@ -38,6 +38,7 @@ jobs:
         run: yarn lint
       - name: Run tests with Knapsack Pro
         env:
+          KNAPSACK_PRO_TEST_FILE_PATTERN: 'cypress/e2e/**/*.{js,jsx,ts,tsx}'
           KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
