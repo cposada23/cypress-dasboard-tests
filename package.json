@@ -19,9 +19,12 @@
   "author": "Camilo Posada <cposadaa@gmail.com> <cposada23>",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^10.0.3"
+    "cypress": "^10.0.3",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.1"
   },
   "devDependencies": {
+    "@knapsack-pro/cypress": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
     "eslint": "^8.16.0",
